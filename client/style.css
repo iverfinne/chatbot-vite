@@ -75,6 +75,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+¨
 
 .ai .profile {
   background: #10a37f;
@@ -86,6 +87,10 @@ body {
   object-fit: contain;
 }
 
+.santa .message {
+  background-color: #ff0000;
+  color: #ffffff;
+}
 .message {
   flex: 1;
 
