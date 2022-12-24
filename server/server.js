@@ -17,11 +17,9 @@ app.use(express.json())
 
 app.get('/', async (req, res) => {
   res.status(200).send({
-    message: 'Marry christmas!'
+    message: 'Hello from CodeX!'
   })
 })
-
-const prompt = "Child: Am I going to get any presents tonight Santa?\n\nSanta: As Santa, I always try my best to bring presents to all the good boys and girls on my list. Have you been a good boy/girl this year? Have you been kind to your friends and family, and have you tried your best to follow the rules? If you have, then I will be sure to leave you some special presents on Christmas Eve. Ho ho ho!";
 
 app.post('/', async (req, res) => {
   try {
@@ -47,4 +45,4 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.listen(5000, () => console.log('AI server started on https://chatbot-vite.onrender.com'))
+app.listen(5000, () => console.log('AI server started on http://localhost:5000'))
