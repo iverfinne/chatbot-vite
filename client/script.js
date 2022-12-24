@@ -1,4 +1,4 @@
-import bot from './assets/bot.svg'
+import santa from './assets/santa.svg'
 import user from './assets/user.svg'
 
 const form = document.querySelector('form')
@@ -33,7 +33,7 @@ function typeText(element, text) {
     }, 20)
 }
 
-// generate unique ID for each message div of bot
+// generate unique ID for each message div of santa
 // necessary for typing text effect for that specific reply
 // without unique ID, typing text will work on every element
 function generateUniqueId() {
@@ -44,15 +44,15 @@ function generateUniqueId() {
     return `id-${timestamp}-${hexadecimalString}`;
 }
 
-function chatStripe(isAi, value, uniqueId) {
+function chatStripe(isSanta, value, uniqueId) {
     return (
         `
-        <div class="wrapper ${isAi && 'ai'}">
+        <div class="wrapper ${isSanta&& 'santa'}">
             <div class="chat">
                 <div class="profile">
                     <img 
-                      src=${isAi ? bot : user} 
-                      alt="${isAi ? 'bot' : 'user'}" 
+                      src=${isSanta? santa : user} 
+                      alt="${isSanta? 'santa' : 'user'}" 
                     />
                 </div>
                 <div class="message" id=${uniqueId}>${value}</div>
@@ -73,7 +73,7 @@ const handleSubmit = async (e) => {
     // to clear the textarea input 
     form.reset()
 
-    // bot's chatstripe
+    // santa's chatstripe
     const uniqueId = generateUniqueId()
     chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
 
