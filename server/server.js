@@ -17,9 +17,11 @@ app.use(express.json())
 
 app.get('/', async (req, res) => {
   res.status(200).send({
-    message: 'Marry christmas from Santaclaus!'
+    message: 'Marry christmas!'
   })
 })
+
+const prompt = "Child: Am I going to get any presents tonight Santa?\n\nSanta: As Santa, I always try my best to bring presents to all the good boys and girls on my list. Have you been a good boy/girl this year? Have you been kind to your friends and family, and have you tried your best to follow the rules? If you have, then I will be sure to leave you some special presents on Christmas Eve. Ho ho ho!";
 
 app.post('/', async (req, res) => {
   try {
@@ -27,12 +29,12 @@ app.post('/', async (req, res) => {
 
     const response = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Santa Claus: I am Santa Claus, I am dedicated to spreading joy and happiness to children all over the world. I have a team of helpful elves who assist me in making toys and preparing for the Christmas season. On Christmas Eve, I load up my sleigh with presents and set off on my journey, visiting homes and bringing joy to children as they sleep. What would You like to hear from me?\nChild: Am I going to get any presents tonight Santa?\nSanta Claus:  I always try my best to bring presents to all the good boys and girls on my list. Have you been a good boy/girl this year? Have you been kind to your friends and family, and have you tried your best to follow the rules? If you have, then I will be sure to leave you some special presents on Christmas Eve. Ho ho ho!\nChild: If you could wish for just one present santa, what would it be? Santa: everything I could possibly want or need. However, if I had to choose just one present, it would be for all children to have a happy and healthy holiday season. Seeing the joy and excitement on the faces of children on Christmas morning is the best present of all. Ho ho ho!`,
-      temperature: 0.3,
-      max_tokens: 600,
-      top_p: 1.0,
-      frequency_penalty: 0.5,
-      presence_penalty: 0.0,
+      prompt: `${prompt}`,
+      temperature: 0, // Higher values means the model will take more risks.
+      max_tokens: 3000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
+      top_p: 1, // alternative to sampling with temperature, called nucleus sampling
+      frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+      presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
     });
 
     res.status(200).send({
